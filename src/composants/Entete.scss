@@ -1,0 +1,41 @@
+.Entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+  font-size: 0.85rem;
+
+  .logo {
+    width: 120px;
+    margin-top: 3.25rem;
+  }
+
+  & > * {
+    display: flex;
+    padding: 0 1.25rem;
+  }
+
+  .utilisateur {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    .avatar {
+      width:4rem;
+      height:4rem;
+    }
+  }
+
+  .utilisateur_infos {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin-right: 1.25rem;
+    button {
+      margin-top: 0.5rem;
+      background-color: transparent;
+    }
+  }
+}
