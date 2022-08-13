@@ -5,7 +5,7 @@ import FrmTache from './FrmTache';
 import ListeTaches from './ListeTaches';
 import Controle from './Controle';
 import { creer } from "../code/taches";
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState} from 'react';
 import { observerEtatConnexion } from "../code/utilisateur";
 
 export default function Appli() {

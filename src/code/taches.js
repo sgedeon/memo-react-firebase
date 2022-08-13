@@ -1,10 +1,13 @@
 import { bdFirestore } from "./init";
 import { getDocs, query, collection, orderBy, addDoc, getDoc, Timestamp, doc, deleteDoc, updateDoc, where} from "firebase/firestore";
 
-//Retourne toutes les tâches 
+/*
+ * Retourne toutes les tâches 
+ *
+ */
 export async function lireTout(idUtilisateur) {
     const taches = await getDocs(
-        query(collection(bdFirestore, 'utilisateurs', idUtilisateur, 'taches'), orderBy('titre', 'desc'))
+        query(collection(bdFirestore, 'utilisateurs', idUtilisateur, 'taches'), orderBy('dateAjout', 'desc'))
     )
     return taches.docs.map(doc => ({id: doc.id, ...doc.data()}))
 }
@@ -12,15 +15,14 @@ export async function lireTout(idUtilisateur) {
 //Retourne les tâches actives
 export async function lireActives(idUtilisateur) {
     const tachesALL = collection(bdFirestore, 'utilisateurs', idUtilisateur, 'taches');
-    const taches = await getDocs(query(tachesALL, where("statut", "==", false)));
-    console.log(taches);
+    const taches = await getDocs(query(tachesALL, where("statut", "==", false)),orderBy('dateAjout', 'desc'));
     return taches.docs.map(doc => ({id: doc.id, ...doc.data()}))
 }
 
 //Retourne les tâches complétées
 export async function lireCompletees(idUtilisateur) {
     const tachesALL = collection(bdFirestore, 'utilisateurs', idUtilisateur, 'taches');
-    const taches = await getDocs(query(tachesALL, where("statut", "==", true)));
+    const taches = await getDocs(query(tachesALL, where("statut", "==", true)),orderBy('dateAjout', 'desc'));
     return taches.docs.map(doc => ({id: doc.id, ...doc.data()}))
 }
 
@@ -42,7 +44,6 @@ export async function supprimerCompletees(idUtilisateur) {
     lireCompletees(idUtilisateur).then(
         tachesFS => {
             const promises = tachesFS.map((tachesFS) => deleteDoc(doc(bdFirestore, 'utilisateurs', idUtilisateur, 'taches', tachesFS['id'])))
-            lireTout(idUtilisateur);
             return Promise.all(promises) 
         }
     );
