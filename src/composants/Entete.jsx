@@ -10,7 +10,7 @@ export default function Entete({utilisateur}) {
       <div className="utilisateur">
         <div className="utilisateur_infos">
           {utilisateur.displayName}
-          <button onClick={deconnexion} class="MuiButtonBase-root MuiButton-root MuiButton-outlined btnDeconnexion MuiButton-outlinedSizeSmall MuiButton-sizeSmall" tabindex="0" type="button">Déconnexion</button>
+          <button onClick={deconnexion} className="btnDeconnexion" tabIndex="0" type="button">Déconnexion</button>
         </div>
         <div className="utilisateur_avatar">
           <Avatar className="avatar" alt={utilisateur.displayName} src={utilisateur.photoURL} />

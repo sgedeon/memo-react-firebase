@@ -3,4 +3,56 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #090;
+    border-bottom: 1px dotted #999;
+    position: relative;
+
+    .texte {
+        flex-grow: 1;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 10px;
+    }
+
+    .texte:hover {
+        cursor: pointer;
+        position: absolute;
+        width: 84%;
+        margin-left: 28px;
+        z-index: 10;
+        display: inline-block;
+        background-color: #fff;
+        border: 1px solid #888;
+        border-radius: 3px;
+        padding: 10px;
+        overflow: visible;
+        white-space: normal;
+    }
+
+    .date {
+        padding: 0 10px;
+        font-size: .9em;
+        white-space: nowrap;
+    }
+    .true {
+        opacity: .7;
+        border-top: 1px dotted brown;
+        margin-top: 5px;
+    }
+}
+
+.Tache.true .date, .Tache.true .texte {
+    text-decoration: line-through;
+    opacity: .3;
+    color: #900;
+}
+
+.Tache:last-of-type {
+    border-bottom: none;
+}
+
+.Tache.true:first-of-type {
+    border-top: none;
 }

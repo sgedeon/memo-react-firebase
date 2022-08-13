@@ -2,21 +2,37 @@ import './Tache.scss';
 import IconButton from '@mui/material/IconButton';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
-export default function Tache({id, titre, statut, dateModif}) {
+import { useState } from 'react';
+export default function Tache({id, titre, statut, dateAjout, supprimerTache, modifierTache}) {
+  const [nvStatut, setNvStatut] = useState(!statut);
+
+  function gererSupprimer() {
+    supprimerTache(id);
+  }
+
+  function gererModifier() {
+    setNvStatut(statut => !statut);
+    modifierTache(id, nvStatut);
+  }
+
   return (
-    // Remarquez l'objet JS donné à la valeur de l'attribut style en JSX, voir : 
-    // https://reactjs.org/docs/dom-elements.html#style
-    <div className="Tache">
-      <IconButton className="supprimer" aria-label="supprimer" size="small" title="Cliquez pour marquer cette tâche complétée">
-        <CheckIcon />
-      </IconButton>
-      <div className="info">
-        <h2>{titre}</h2>
-        <p>{dateModif}</p>
-      </div>
-      <IconButton className="supprimer" aria-label="supprimer" size="small" title="Cliquez pour supprimer cette tâche">
-        <DeleteIcon />
-      </IconButton>
-    </div>
+      <>
+        <IconButton className="modifier" onClick={gererModifier} aria-label="supprimer" size="small" title="Cliquez pour marquer cette tâche complétée">
+          <CheckIcon />
+        </IconButton>
+          <span className="texte">{titre}</span>
+          <span className="date">Créée le :     <b>
+            {new Date(dateAjout.seconds*1000).toLocaleDateString([],{
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+          </b></span>
+        <IconButton className="supprimer" onClick={gererSupprimer} aria-label="supprimer" size="small" title="Cliquez pour supprimer cette tâche">
+          <DeleteIcon />
+        </IconButton>
+      </>
   );
 }

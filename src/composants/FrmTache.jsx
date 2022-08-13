@@ -16,8 +16,8 @@ export default function FormTache({gererActionTache}) {
   }
 
   return (
-      <form onSubmit={gererSoumettre}>
-        <input type="text" onChange={gererChangement} value={titre} placeholder="Ajoutez une tâche ..." name="texteTache" autocomplete="off"/>
+      <form className="formTache" onSubmit={gererSoumettre}>
+        <input type="text" onChange={gererChangement} value={titre} placeholder="Ajoutez une tâche ..." name="texteTache" autoComplete="off"/>
       </form>
   );
 }

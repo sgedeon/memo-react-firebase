@@ -5,13 +5,11 @@ import FrmTache from './FrmTache';
 import ListeTaches from './ListeTaches';
 import Controle from './Controle';
 import { creer } from "../code/taches";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { observerEtatConnexion } from "../code/utilisateur";
 
 export default function Appli() {
   const [utilisateur, setUtilisateur] = useState(null);
-
-    // État des dossiers de l'utilisateur
   const [taches, setTaches] = useState([]);
 
   useEffect(
@@ -34,9 +32,9 @@ export default function Appli() {
         <Entete utilisateur={utilisateur}/>
         <section className="Taches">
           <FrmTache gererActionTache={ajouterTache} />
-
+          <ListeTaches idUtilisateur={utilisateur.uid} taches={taches} setTaches={setTaches} />
         </section>
-  
+        <Controle idUtilisateur={utilisateur.uid} taches={taches} setTaches={setTaches} />
     </div>
     :
     <Accueil/>
