@@ -67,7 +67,7 @@ export default function Controle({idUtilisateur, taches, setTaches}) {
           </ButtonGroup>
           <span>{TxtTache} : {NbActives}</span>
           <IconButton onClick={gererSupprimerCompletees} className="supprimer" color="error" aria-label="supprimer" size="small" title="Cliquez pour supprimer toutes les tâches complétées">
-            <DeleteIcon />
+              <DeleteIcon />
           </IconButton>
         </>
       }

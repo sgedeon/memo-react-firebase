@@ -21,13 +21,17 @@ export default function Tache({id, titre, statut, dateAjout, supprimerTache, mod
           <CheckIcon />
         </IconButton>
           <span className="texte">{titre}</span>
-          <span className="date">Créée le :     <b>
+          <span className="date">Créée le :&nbsp;<b>
             {new Date(dateAjout.seconds*1000).toLocaleDateString([],{
               year: 'numeric',
               month: '2-digit',
               day: '2-digit',
+            })} 
+            <span>&nbsp;à&nbsp;</span>
+            {new Date (dateAjout.seconds*1000).toLocaleTimeString(navigator.language, {
               hour: '2-digit',
-              minute: '2-digit',
+              minute:'2-digit',
+              second:'2-digit',
             })}
           </b></span>
         <IconButton className="supprimer" onClick={gererSupprimer} aria-label="supprimer" size="small" title="Cliquez pour supprimer cette tâche">
