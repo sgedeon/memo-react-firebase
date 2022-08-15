@@ -4,6 +4,10 @@ import { useState } from 'react';
 export default function FormTache({gererActionTache}) {
   const [titre, setTitre] = useState('');
 
+  /**
+   * Gère le titre d'une tâche
+   * @param  {string} event 
+   */
   function gererSoumettre(event) {
     event.preventDefault();
     if (titre.length > 0 ) {
@@ -12,6 +16,10 @@ export default function FormTache({gererActionTache}) {
     }
   }
 
+  /**
+   * Gère le titre d'une tâche
+   * @param  {string} event 
+   */
   function gererChangement(event) {
     setTitre(event.target.value)
   }

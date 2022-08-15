@@ -10,12 +10,21 @@ import { observerEtatConnexion } from "../code/utilisateur";
 
 export default function Appli() {
   const [utilisateur, setUtilisateur] = useState(null);
+
+  // État des taches de l'utilisateur
   const [taches, setTaches] = useState([]);
 
+
+  // Écoute la connexion de l'utilisateur au chargement de la page
   useEffect(
     ()  => observerEtatConnexion(setUtilisateur)
   , []);
 
+  /**
+   * Gère l'ajout d'une tâche
+   *
+   * @param  {string} titre Titre de la tâche 
+   */
   function ajouterTache(titre) {
     console.log('Valeurs du formulaire : ', titre);
     creer(utilisateur.uid, {

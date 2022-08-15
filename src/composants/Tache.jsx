@@ -6,10 +6,16 @@ import { useState } from 'react';
 export default function Tache({id, titre, statut, dateAjout, supprimerTache, modifierTache}) {
   const [nvStatut, setNvStatut] = useState(!statut);
 
+  /**
+   * Gère la suppresssion d'une tâche
+   */
   function gererSupprimer() {
     supprimerTache(id);
   }
 
+  /**
+   * Gère la modification d'une tâche
+   */
   function gererModifier() {
     setNvStatut(statut => !statut);
     modifierTache(id, nvStatut);

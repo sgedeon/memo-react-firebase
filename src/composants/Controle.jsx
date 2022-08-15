@@ -7,7 +7,11 @@ import { useState, useEffect } from 'react';
 import * as tachesModele from "../code/taches";
 
 export default function Controle({idUtilisateur, taches, setTaches}) {
+
+   // État des taches actives de l'utilisateur
   const [NbActives, setNbActives] = useState('');
+
+   // État du texte soumis par l'utilisateur
   const [TxtTache, setTxtTache] = useState('');
 
   useEffect(() =>
@@ -24,6 +28,10 @@ export default function Controle({idUtilisateur, taches, setTaches}) {
         }
   ));
 
+  /**
+   * Gère l'affichage des tâches complétées
+   *
+   */
   function gererCompletees() {
       tachesModele.lireCompletees(idUtilisateur).then(
         tachesFS => {
@@ -33,6 +41,10 @@ export default function Controle({idUtilisateur, taches, setTaches}) {
       )
   };
 
+  /**
+   * Gère l'affichage de toutes les tâches
+   *
+   */
   function gererToutes() {
       tachesModele.lireTout(idUtilisateur).then(
         tachesFS => {
@@ -42,6 +54,10 @@ export default function Controle({idUtilisateur, taches, setTaches}) {
       )
   };
 
+  /**
+   * Gère l'affichage des tâches actives
+   *
+   */
   function gererActives() {
       tachesModele.lireActives(idUtilisateur).then(
         tachesFS => {
@@ -51,6 +67,10 @@ export default function Controle({idUtilisateur, taches, setTaches}) {
       )
   };
 
+  /**
+   * Gère la suppression des tâches complétées
+   *
+   */
   function gererSupprimerCompletees() {
       tachesModele.supprimerCompletees(idUtilisateur);
       gererActives();

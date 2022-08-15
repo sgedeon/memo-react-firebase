@@ -14,6 +14,10 @@ export default function ListeTaches({idUtilisateur, taches, setTaches}) {
     )
   ,[idUtilisateur,setTaches]);
 
+  /**
+   * Gère la suppression d'une tâche
+   * @param  {string} idTache, Identifiant de la tâche
+   */
   function supprimerTache(idTache) {
     tachesModele.supprimer(idUtilisateur, idTache).then(
       () => setTaches(taches.filter(
@@ -22,6 +26,11 @@ export default function ListeTaches({idUtilisateur, taches, setTaches}) {
     );
   }
 
+  /**
+   * Gère la modification d'une tâche
+   * @param  {string} nvStatut Statut de la tâche 
+   * @param  {string} idTache, Identifiant de la tâche
+   */
   function modifierTache(idTache,  nvStatut) {
     const objetNouvellesValeursTache = {
       statut: nvStatut,
