@@ -14,42 +14,32 @@ export default function Controle({idUtilisateur, taches, setTaches}) {
    // État du texte soumis par l'utilisateur
   const [TxtTache, setTxtTache] = useState('');
 
-  useEffect(() =>
-  () => tachesModele.lireActives(idUtilisateur).then(
-        NbActivesFS => {
-          NbActivesFS = NbActivesFS.length
-          setNbActives(NbActivesFS);
-          if (NbActivesFS > 1) {
-            setTxtTache('Tâches restantes')
-          } else {
-            setTxtTache('Tâche restante')
+  useEffect(
+    () => {
+       tachesModele.lireActives(idUtilisateur).then(
+          NbActivesFS => {
+            NbActivesFS = NbActivesFS.length
+            setNbActives(NbActivesFS);
+            if (NbActivesFS > 1) {
+              setTxtTache('Tâches restantes')
+            } else {
+              setTxtTache('Tâche restante')
+            }
           }
-          console.log('Nombre de tâches retournés par Firestore : ', NbActivesFS);
-        }
-  ));
+      )
+    }
+  ,[idUtilisateur, taches]);
 
   /**
    * Gère l'affichage des tâches complétées
    *
    */
   function gererCompletees() {
-      tachesModele.lireCompletees(idUtilisateur).then(
-        tachesFS => {
-          setTaches(tachesFS);
-          console.log('Tâches retournés par Firestore : ', tachesFS);
-        }
-      )
-  };
-
-  /**
-   * Gère l'affichage de toutes les tâches
-   *
-   */
-  function gererToutes() {
       tachesModele.lireTout(idUtilisateur).then(
         tachesFS => {
-          setTaches(tachesFS);
-          console.log('Tâches retournés par Firestore : ', tachesFS);
+          setTaches(tachesFS.filter(
+            tachesFS => tachesFS.statut !== false
+          ))
         }
       )
   };
@@ -59,10 +49,23 @@ export default function Controle({idUtilisateur, taches, setTaches}) {
    *
    */
   function gererActives() {
-      tachesModele.lireActives(idUtilisateur).then(
+      tachesModele.lireTout(idUtilisateur).then(
+        tachesFS => {
+          setTaches(tachesFS.filter(
+            tachesFS => tachesFS.statut !== true
+          ))
+        }
+      )
+   };
+
+  /**
+   * Gère l'affichage de toutes les tâches
+   *
+   */
+  function gererToutes() {
+      tachesModele.lireTout(idUtilisateur).then(
         tachesFS => {
           setTaches(tachesFS);
-          console.log('Tâches retournés par Firestore : ', tachesFS);
         }
       )
   };
