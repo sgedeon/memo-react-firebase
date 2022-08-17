@@ -1,8 +1,7 @@
 import './FrmTache.scss'; 
 import { useState } from 'react';
 
-export default function FormTache({gererActionTache, tachesRequises,afficherToutes, 
-  afficherActives, afficherCompletees }) {
+export default function FormTache({gererActionTache, tachesRequises, gestionAffichage}) {
   const [titre, setTitre] = useState('');
 
   /**
@@ -15,13 +14,7 @@ export default function FormTache({gererActionTache, tachesRequises,afficherTout
       gererActionTache(titre);
       setTitre('');
     }
-    if (tachesRequises === "complétées") {
-      afficherCompletees();
-    } else if (tachesRequises === "actives"){
-      afficherActives();
-    } else {
-      afficherToutes();
-    }
+    gestionAffichage();
   }
 
   /**

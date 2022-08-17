@@ -37,6 +37,22 @@ export default function Appli() {
     })
   }
 
+
+  /**
+   * Gère l'affichage des tâches 
+   *
+   */
+  function gestionAffichage() {
+    if (tachesRequises === "complétées") {
+      afficherCompletees();
+    } else if (tachesRequises === "actives"){
+      afficherActives();
+    } else {
+      afficherToutes();
+    }
+  }
+
+
   /**
    * Gère l'affichage des tâches complétées
    *
@@ -82,11 +98,9 @@ export default function Appli() {
     <div className="Appli">
         <Entete utilisateur={utilisateur}/>
         <section className="Taches">
-          <FrmTache gererActionTache={ajouterTache} tachesRequises={tachesRequises} afficherActives={afficherActives} 
-          afficherCompletees={afficherCompletees} afficherToutes={afficherToutes}/>
+          <FrmTache gererActionTache={ajouterTache} tachesRequises={tachesRequises} gestionAffichage={gestionAffichage}/>
           <ListeTaches idUtilisateur={utilisateur.uid} taches={taches} setTaches={setTaches} tachesRequises={tachesRequises} 
-          afficherActives={afficherActives} 
-          afficherCompletees={afficherCompletees} afficherToutes={afficherToutes}/>
+          gestionAffichage={gestionAffichage}/>
         </section>
         <Controle idUtilisateur={utilisateur.uid} taches={taches} setTachesRequises={setTachesRequises}/>
     </div>

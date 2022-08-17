@@ -3,8 +3,8 @@ import Tache from './Tache';
 import { useEffect } from 'react';
 import * as tachesModele from "../code/taches";
 
-export default function ListeTaches({idUtilisateur, taches, setTaches, 
-  tachesRequises, afficherToutes, afficherActives, afficherCompletees}) {
+export default function ListeTaches({idUtilisateur, taches, setTaches, gestionAffichage, 
+  tachesRequises}) {
 
   useEffect(
     () => {
@@ -17,15 +17,7 @@ export default function ListeTaches({idUtilisateur, taches, setTaches,
   ,[idUtilisateur,setTaches]);
 
   useEffect(
-    ()  => {   
-        if (tachesRequises === "complétées") {
-          afficherCompletees();
-        } else if (tachesRequises === "actives"){
-          afficherActives();
-        } else {
-          afficherToutes();
-        }
-    }
+    ()  => gestionAffichage()
   , [tachesRequises]);
 
 
@@ -61,13 +53,7 @@ export default function ListeTaches({idUtilisateur, taches, setTaches,
             return tache;
           }
         ))
-        if (tachesRequises === "complétées") {
-          afficherCompletees();
-        } else if (tachesRequises === "actives"){
-          afficherActives();
-        } else {
-          afficherToutes();
-        }
+        gestionAffichage()
       }
     );
   }

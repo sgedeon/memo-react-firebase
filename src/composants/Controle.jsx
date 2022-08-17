@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useState, useEffect } from 'react';
 import * as tachesModele from "../code/taches";
 
-export default function Controle({idUtilisateur, taches, setTachesRequises}) {
+export default function Controle({idUtilisateur, taches, setTachesRequises,gestionAffichage}) {
 
    // État des taches actives de l'utilisateur
   const [NbActives, setNbActives] = useState('');
