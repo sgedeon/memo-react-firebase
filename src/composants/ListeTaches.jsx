@@ -5,13 +5,14 @@ import * as tachesModele from "../code/taches";
 
 export default function ListeTaches({idUtilisateur, taches, setTaches}) {
 
-  useEffect(() =>
-    () => tachesModele.lireTout(idUtilisateur).then(
-      tachesFS => {
-        setTaches(tachesFS);
-        console.log('Tâches retournés par Firestore : ', tachesFS);
-      }
-    )
+  useEffect(
+    () => {
+        tachesModele.lireTout(idUtilisateur).then(
+        tachesFS => {
+          setTaches(tachesFS);
+        }
+      )
+    }
   ,[idUtilisateur,setTaches]);
 
   /**
