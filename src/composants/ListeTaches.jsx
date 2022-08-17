@@ -3,7 +3,8 @@ import Tache from './Tache';
 import { useEffect } from 'react';
 import * as tachesModele from "../code/taches";
 
-export default function ListeTaches({idUtilisateur, taches, setTaches}) {
+export default function ListeTaches({idUtilisateur, taches, setTaches, 
+  tachesRequises, afficherToutes, afficherActives, afficherCompletees}) {
 
   useEffect(
     () => {
@@ -14,6 +15,19 @@ export default function ListeTaches({idUtilisateur, taches, setTaches}) {
       )
     }
   ,[idUtilisateur,setTaches]);
+
+  useEffect(
+    ()  => {   
+        if (tachesRequises === "complétées") {
+          afficherCompletees();
+        } else if (tachesRequises === "actives"){
+          afficherActives();
+        } else {
+          afficherToutes();
+        }
+    }
+  , [tachesRequises]);
+
 
   /**
    * Gère la suppression d'une tâche
@@ -38,14 +52,23 @@ export default function ListeTaches({idUtilisateur, taches, setTaches}) {
     }
 
     tachesModele.modifier(idUtilisateur, idTache, objetNouvellesValeursTache).then(
-      () => setTaches(taches.map(
-        tache => {
-          if(tache.id === idTache) {
-            tache.statut = nvStatut;
+      () => {
+        setTaches(taches.map(
+          tache => {
+            if(tache.id === idTache) {
+              tache.statut = nvStatut;
+            }
+            return tache;
           }
-          return tache;
+        ))
+        if (tachesRequises === "complétées") {
+          afficherCompletees();
+        } else if (tachesRequises === "actives"){
+          afficherActives();
+        } else {
+          afficherToutes();
         }
-      ))
+      }
     );
   }
 

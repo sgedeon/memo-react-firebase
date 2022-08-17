@@ -6,7 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useState, useEffect } from 'react';
 import * as tachesModele from "../code/taches";
 
-export default function Controle({idUtilisateur, taches, setTaches}) {
+export default function Controle({idUtilisateur, taches, setTachesRequises}) {
 
    // État des taches actives de l'utilisateur
   const [NbActives, setNbActives] = useState('');
@@ -35,13 +35,7 @@ export default function Controle({idUtilisateur, taches, setTaches}) {
    *
    */
   function gererCompletees() {
-      tachesModele.lireTout(idUtilisateur).then(
-        tachesFS => {
-          setTaches(tachesFS.filter(
-            tachesFS => tachesFS.statut !== false
-          ))
-        }
-      )
+      setTachesRequises("complétées");
   };
 
   /**
@@ -49,25 +43,15 @@ export default function Controle({idUtilisateur, taches, setTaches}) {
    *
    */
   function gererActives() {
-      tachesModele.lireTout(idUtilisateur).then(
-        tachesFS => {
-          setTaches(tachesFS.filter(
-            tachesFS => tachesFS.statut !== true
-          ))
-        }
-      )
-   };
+      setTachesRequises("actives");
+  };
 
   /**
    * Gère l'affichage de toutes les tâches
    *
    */
   function gererToutes() {
-      tachesModele.lireTout(idUtilisateur).then(
-        tachesFS => {
-          setTaches(tachesFS);
-        }
-      )
+      setTachesRequises("toutes");
   };
 
   /**

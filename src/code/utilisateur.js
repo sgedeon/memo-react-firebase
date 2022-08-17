@@ -24,7 +24,6 @@ export function observerEtatConnexion(mutateurEtatUtilisateur) {
             }
 
             mutateurEtatUtilisateur(util);
-            console.log('Utilisateur', util);
         }
     )
 }

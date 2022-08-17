@@ -8,10 +8,9 @@ import { getDocs, query, collection, orderBy, addDoc, getDoc, Timestamp, doc, de
  * @return {array}
  */
 export async function lireTout(idUtilisateur) {
-    console.log(idUtilisateur);
     const taches = await getDocs(
         query(collection(bdFirestore, 'utilisateurs', idUtilisateur, 'taches'), orderBy('dateAjout', 'desc'))
-    )
+    );
     return taches.docs.map(doc => ({id: doc.id, ...doc.data()}))
 }
 
@@ -23,8 +22,9 @@ export async function lireTout(idUtilisateur) {
  * @return {array}
  */
 export async function lireActives(idUtilisateur) {
-    const tachesALL = collection(bdFirestore, 'utilisateurs', idUtilisateur, 'taches');
-    const taches = await getDocs(query(tachesALL, where("statut", "==", false)),orderBy('dateAjout', 'desc'));
+    const taches = await getDocs(
+        query(collection(bdFirestore, 'utilisateurs', idUtilisateur, 'taches'), where("statut", "==", false))
+    );
     return taches.docs.map(doc => ({id: doc.id, ...doc.data()}))
 }
 
@@ -36,8 +36,9 @@ export async function lireActives(idUtilisateur) {
  * @return {array}
  */
 export async function lireCompletees(idUtilisateur) {
-    const tachesALL = collection(bdFirestore, 'utilisateurs', idUtilisateur, 'taches');
-    const taches = await getDocs(query(tachesALL, where("statut", "==", true)),orderBy('dateAjout', 'desc'));
+    const taches = await getDocs(
+        query(collection(bdFirestore, 'utilisateurs', idUtilisateur, 'taches'), where("statut", "==", true))
+    );
     return taches.docs.map(doc => ({id: doc.id, ...doc.data()}))
 }
 
@@ -52,7 +53,6 @@ export async function lireCompletees(idUtilisateur) {
 export async function creer(idUtilisateur, infoTache) {
     infoTache.dateAjout = Timestamp.now();
     let refDoc = await addDoc(collection(bdFirestore, 'utilisateurs', idUtilisateur, 'taches'), infoTache);
-    console.log(refDoc);
     return await getDoc(refDoc);
 }
 
